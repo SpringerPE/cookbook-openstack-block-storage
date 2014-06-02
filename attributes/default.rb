@@ -296,3 +296,5 @@ when 'debian'
     'package_overrides' => "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"
   }
 end
+
+default['openstack']['block-storage']['platform']['service_provider'] = node['openstack']['common']['platform']['service_provider']
