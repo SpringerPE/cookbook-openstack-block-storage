@@ -36,7 +36,7 @@ platform_options['cinder_api_packages'].each do |pkg|
   end
 end
 
-db_type = node['openstack']['db']['block-storage']['service_type']
+db_type = node['openstack']['db']['service_type']
 platform_options["#{db_type}_python_packages"].each do |pkg|
   package pkg do
     action :upgrade
@@ -52,6 +52,7 @@ end
 service 'cinder-api' do
   service_name platform_options['cinder_api_service']
   supports status: true, restart: true
+  provider platform_options['service_provider']
   action :enable
   subscribes :restart, 'template[/etc/cinder/cinder.conf]'
 end

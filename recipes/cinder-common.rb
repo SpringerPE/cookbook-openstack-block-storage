@@ -34,7 +34,7 @@ db_user = node['openstack']['db']['block-storage']['username']
 db_pass = get_password 'db', 'cinder'
 sql_connection = db_uri('block-storage', db_user, db_pass)
 
-mq_service_type = node['openstack']['mq']['block-storage']['service_type']
+mq_service_type = node['openstack']['mq']['service_type']
 
 if mq_service_type == 'rabbitmq'
   if node['openstack']['mq']['block-storage']['rabbit']['ha']

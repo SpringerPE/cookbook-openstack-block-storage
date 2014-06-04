@@ -43,6 +43,7 @@ end
 service 'cinder-scheduler' do
   service_name platform_options['cinder_scheduler_service']
   supports status: true, restart: true
+  provider platform_options['service_provider']
   action [:enable, :start]
   subscribes :restart, 'template[/etc/cinder/cinder.conf]'
 end

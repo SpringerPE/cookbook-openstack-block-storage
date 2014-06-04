@@ -37,7 +37,7 @@ platform_options['cinder_volume_packages'].each do |pkg|
   end
 end
 
-db_type = node['openstack']['db']['block-storage']['service_type']
+db_type = node['openstack']['db']['service_type']
 platform_options["#{db_type}_python_packages"].each do |pkg|
   package pkg do
     action :upgrade
@@ -182,7 +182,7 @@ when 'cinder.volume.drivers.lvm.LVMISCSIDriver'
 
     service 'cinder-group-active' do
       service_name 'cinder-group-active'
-
+      provider platform_options['service_provider']
       action [:enable, :start]
     end
   end
@@ -210,12 +210,14 @@ end
 service 'cinder-volume' do
   service_name platform_options['cinder_volume_service']
   supports status: true, restart: true
+  provider platform_options['service_provider']
   action [:enable, :start]
   subscribes :restart, 'template[/etc/cinder/cinder.conf]'
 end
 
 service 'iscsitarget' do
   service_name platform_options['cinder_iscsitarget_service']
+  provider platform_options['service_provider']
   supports status: true, restart: true
   action :enable
 end
