@@ -63,8 +63,10 @@ default['openstack']['block-storage']['keystone_service_chef_role'] = 'keystone'
 # Keystone PKI signing directory. Only written to the filter:authtoken section
 # of the api-paste.ini when node['openstack']['auth']['strategy'] == 'pki'
 default['openstack']['block-storage']['api']['auth']['cache_dir'] = '/var/cache/cinder/api'
-
 default['openstack']['block-storage']['api']['auth']['version'] = node['openstack']['api']['auth']['version']
+
+# DB
+default['openstack']['db']['block-storage']['service_type'] = node['openstack']['db']['service_type']
 
 # Maximum allocatable gigabytes
 # Should equal total backend storage, default is 10TB
@@ -212,6 +214,7 @@ default['openstack']['block-storage']['volume']['volume_clear'] = 'zero'
 default['openstack']['block-storage']['volume']['create_volume_group'] = false
 default['openstack']['block-storage']['volume']['iscsi_helper'] = 'tgtadm'
 default['openstack']['block-storage']['volume']['iscsi_ip_address'] = node['ipaddress']
+default['openstack']['block-storage']['volume']['iscsi_iface'] = nil
 default['openstack']['block-storage']['volume']['iscsi_port'] = '3260'
 
 # Ceph/RADOS options

@@ -37,7 +37,7 @@ platform_options['cinder_volume_packages'].each do |pkg|
   end
 end
 
-db_type = node['openstack']['db']['service_type']
+db_type = node['openstack']['db']['block-storage']['service_type']
 platform_options["#{db_type}_python_packages"].each do |pkg|
   package pkg do
     action :upgrade

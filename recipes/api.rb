@@ -36,7 +36,7 @@ platform_options['cinder_api_packages'].each do |pkg|
   end
 end
 
-db_type = node['openstack']['db']['service_type']
+db_type = node['openstack']['db']['block-storage']['service_type']
 platform_options["#{db_type}_python_packages"].each do |pkg|
   package pkg do
     action :upgrade
@@ -57,7 +57,7 @@ service 'cinder-api' do
   subscribes :restart, 'template[/etc/cinder/cinder.conf]'
 end
 
-identity_endpoint = endpoint 'identity-api'
+identity_endpoint = endpoint 'identity-api-internal'
 identity_admin_endpoint = endpoint 'identity-admin'
 service_pass = get_password 'service', 'openstack-block-storage'
 

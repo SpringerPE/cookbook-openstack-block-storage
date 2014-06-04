@@ -54,7 +54,11 @@ when 'cinder.volume.drivers.vmware.vmdk.VMwareVcVmdkDriver'
   vmware_host_pass = get_secret node['openstack']['block-storage']['vmware']['secret_name']
 end
 
-glance_api_endpoint = endpoint 'image-api'
+if node['openstack']['block-storage']['volume']['iscsi_iface']
+  node.set['openstack']['block-storage']['volume']['iscsi_ip_address'] = address_for node['openstack']['block-storage']['volume']['iscsi_iface']
+end
+
+glance_api_endpoint = endpoint 'image-api-internal'
 cinder_api_bind = endpoint 'block-storage-api-bind'
 
 directory '/etc/cinder' do
