@@ -53,13 +53,6 @@ default['openstack']['block-storage']['scheduler_role'] = 'os-block-storage-sche
 default['openstack']['block-storage']['volume_name_template'] = 'volume-%s'
 default['openstack']['block-storage']['snapshot_name_template'] = 'snapshot-%s'
 
-# The name of the Chef role that knows about the message queue server
-# that Cinder uses
-default['openstack']['block-storage']['rabbit_server_chef_role'] = 'os-ops-messaging'
-
-# This is the name of the Chef role that will install the Keystone Service API
-default['openstack']['block-storage']['keystone_service_chef_role'] = 'keystone'
-
 # Keystone PKI signing directory. Only written to the filter:authtoken section
 # of the api-paste.ini when node['openstack']['auth']['strategy'] == 'pki'
 default['openstack']['block-storage']['api']['auth']['cache_dir'] = '/var/cache/cinder/api'
